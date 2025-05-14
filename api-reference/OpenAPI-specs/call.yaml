@@ -85,7 +85,6 @@ components:
 paths:
   /create-call:
     post:
-      tags: [Calls]
       summary: Create a single outbound call
       requestBody:
         required: true
@@ -106,7 +105,6 @@ paths:
         - bearerAuth: [ ]
   /get-call/{call_id}:
     get:
-      tags: [Calls]
       summary: Get details of a specific call
       parameters:
         - name: call_id
@@ -127,7 +125,6 @@ paths:
         - bearerAuth: [ ]
   /list-calls:
     get:
-      tags: [Calls]
       summary: List calls filtered by campaign and date range
       parameters:
         - name: campaign_id
