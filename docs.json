@@ -22,19 +22,16 @@
           {
             "group": "Call",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/call/create",
+              "api-reference/endpoint/call/get",
+              "api-reference/endpoint/call/list"
+              
             ]
           },
           {
             "group": "Campaign",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/campaign/create"
             ]
           },
           {
