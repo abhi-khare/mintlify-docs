@@ -1,225 +1,343 @@
-openapi: 3.0.3
-info:
-  title: VoiceLabs Platform API
-  description: REST API specification for the VoiceLabs automated calling platform.
-  version: "1.0.0"
-servers:
-  - url: https://platform.voicelabs.in/api/v1
-paths:
-  /create-call:
-    post:
-      summary: Create a single outbound call
-      operationId: createCall
-      tags: [Calls]
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateCallRequest"
-      responses:
-        "201":
-          description: Call created successfully.
-        "400":
-          description: Invalid request payload.
-  /get-call/{call_id}:
-    get:
-      summary: Retrieve details of a specific call by its unique identifier.
-      operationId: getCall
-      tags: [Calls]
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: call_id
-          required: true
-          description: Unique identifier of the call.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Call details retrieved.
-        "404":
-          description: Call not found.
-  /list-calls:
-    get:
-      summary: List calls filtered by campaign ID and optional date range.
-      operationId: listCalls
-      tags: [Calls]
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: query
-          name: campaign_id
-          schema:
-            type: string
-          description: Campaign identifier to filter calls.
-        - in: query
-          name: start
-          schema:
-            type: string
-            format: date-time
-          description: ISO‑8601 start timestamp (inclusive).
-        - in: query
-          name: end
-          schema:
-            type: string
-            format: date-time
-          description: ISO‑8601 end timestamp (exclusive).
-      responses:
-        "200":
-          description: Paginated list of calls.
-  /batch-call:
-    post:
-      summary: Create multiple calls in bulk via CSV upload.
-      operationId: batchCall
-      tags: [Calls]
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                metadata:
-                  type: string
-                  description: JSON string with batch‑level metadata.
-                  example: '{"priority":"high","locale":"fr-FR"}'
-                file:
-                  type: string
-                  format: binary
-                  description: CSV file containing call definitions.
-                campaign_id:
-                  type: string
-                  description: Campaign identifier to associate the calls with.
-              required: [file]
-      responses:
-        "202":
-          description: Batch accepted and queued for processing.
-  /health:
-    get:
-      summary: Health check endpoint.
-      operationId: health
-      tags: [Utils]
-      responses:
-        "200":
-          description: Service is healthy.
-  /confirm:
-    post:
-      summary: Confirm a user's sign‑up using a verification code.
-      operationId: confirmUser
-      tags: [Auth]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ConfirmRequest"
-      responses:
-        "200":
-          description: User confirmed.
-        "400":
-          description: Invalid confirmation code.
-  /login:
-    post:
-      summary: Authenticate a user and obtain JWT access tokens.
-      operationId: login
-      tags: [Auth]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LoginRequest"
-      responses:
-        "200":
-          description: Authentication successful.
-  /signup:
-    post:
-      summary: Register a new user account.
-      operationId: signup
-      tags: [Auth]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SignupRequest"
-      responses:
-        "201":
-          description: User created.
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-  schemas:
-    CreateCallRequest:
-      type: object
-      properties:
-        to_number:
-          type: string
-          description: E.164 formatted phone number to be called.
-          example: "+917987544173"
-        dynamic_variables:
-          type: object
-          description: Key‑value pairs used to personalise the call script.
-          properties:
-            customer_name: { type: string, example: "abhinash" }
-            dealer_name: { type: string, example: "vinod volvo" }
-            vehicle_no: { type: string, example: "K34hjslwn" }
-            callback_date: { type: string, example: "30 June 25" }
-            callback_time: { type: string, example: "12 pm" }
-            alt_contact_name: { type: string, example: "chrome" }
-            alt_contact_no: { type: string, example: "+918391234567" }
-        metadata:
-          type: object
-          description: Additional identifiers for reporting and auditing.
-          properties:
-            org_id: { type: string, example: "org_398ufn29a" }
-            user_id: { type: string, example: "user_9204jkal" }
-        campaign_id:
-          type: string
-          description: Campaign identifier that this call belongs to.
-      required: [to_number, campaign_id]
-    ConfirmRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: "rakeshVoxiflow"
-        confirmation_code:
-          type: string
-          example: "502314"
-      required: [username, confirmation_code]
-    LoginRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: "rakeshVoxiflow"
-        password:
-          type: string
-          format: password
-          example: "Rakesh@voxi123"
-      required: [username, password]
-    SignupRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: "rakeshVoxiflow"
-        email:
-          type: string
-          format: email
-          example: "rakeshkanugula76@gmail.com"
-        password:
-          type: string
-          format: password
-          example: "Rakesh@voxi123"
-      required: [username, email, password]
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "VoiceLabs Platform API",
+    "description": "REST API for VoiceLabs automated call platform",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://platform.voicelabs.in/api/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CallRequest": {
+        "type": "object",
+        "properties": {
+          "to_number": {
+            "type": "string",
+            "example": "+917987544173"
+          },
+          "dynamic_variables": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "org_id": {
+                "type": "string"
+              },
+              "user_id": {
+                "type": "string"
+              }
+            }
+          },
+          "campaign_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "to_number",
+          "campaign_id"
+        ]
+      },
+      "BatchCallMetadata": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "normal",
+              "high"
+            ]
+          },
+          "locale": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "SignupRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "email",
+          "password"
+        ]
+      },
+      "ConfirmRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "confirmation_code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "confirmation_code"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/create-call": {
+      "post": {
+        "summary": "Create a single outbound call",
+        "operationId": "createCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Call created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/batch-call/": {
+      "post": {
+        "summary": "Create batch outbound calls from a file",
+        "operationId": "batchCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "JSON string with batch metadata",
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "campaign_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file",
+                  "campaign_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Batch accepted"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/get-call/{call_id}": {
+      "get": {
+        "summary": "Retrieve call details",
+        "operationId": "getCall",
+        "parameters": [
+          {
+            "name": "call_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Call details returned"
+          },
+          "404": {
+            "description": "Call not found"
+          }
+        }
+      }
+    },
+    "/list-calls": {
+      "get": {
+        "summary": "List calls with optional filters",
+        "operationId": "listCalls",
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of calls"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "operationId": "health",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Service healthy"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Authenticate user and obtain JWT",
+        "operationId": "login",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "summary": "Create a new user account",
+        "operationId": "signup",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/confirm": {
+      "post": {
+        "summary": "Confirm user account",
+        "operationId": "confirmAccount",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account confirmed"
+          },
+          "400": {
+            "description": "Invalid code"
+          }
+        }
+      }
+    }
+  }
+}
