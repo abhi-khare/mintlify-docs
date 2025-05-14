@@ -19,22 +19,7 @@
             "source": "api-reference/openapi.json",
             "directory": "api-reference"
           }
-        },
-          {
-            "group": "Call",
-            "pages": [
-              "api-reference/endpoint/call/create",
-              "api-reference/endpoint/call/get",
-              "api-reference/endpoint/call/list"
-              
-            ]
-          },
-          {
-            "group": "Campaign",
-            "pages": [
-              "api-reference/endpoint/campaign/create"
-            ]
-          }
+        }
         ]
       }
     ]
