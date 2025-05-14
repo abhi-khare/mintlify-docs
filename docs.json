@@ -18,6 +18,12 @@
           "openapi": {
             "source": "api-reference/openapi.json"
           }
+        },
+          {
+          "group": "Call",
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/call.yaml"
+          }
         }
         ]
       }
