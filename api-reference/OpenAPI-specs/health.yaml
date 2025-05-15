@@ -29,7 +29,6 @@ components:
 paths:
   /health:
     get:
-      tags: [Health]
       summary: Health probe
       description: Check that the service is up and responding.
       responses:

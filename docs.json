@@ -16,7 +16,8 @@
           {
           "group": "Health",
           "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.json"
+            "source": "api-reference/OpenAPI-specs/health.json",
+            "directory": "Health"
           }
         },
           {
@@ -29,6 +30,12 @@
           "group": "Post-call",
           "openapi": {
             "source": "api-reference/AsyncAPI-specs/post-call.yaml"
+          }
+        },
+          {
+          "group": "Campaign",
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/campaign.yaml"
           }
         }
         ]
