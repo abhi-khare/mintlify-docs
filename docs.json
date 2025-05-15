@@ -16,8 +16,7 @@
           {
           "group": "Health",
           "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.json",
-            "directory": "Health"
+            "source": "api-reference/OpenAPI-specs/health.json"
           }
         },
           {
