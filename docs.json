@@ -14,9 +14,9 @@
         "tab": "API Reference",
         "groups": [
           {
-          "group": "Endpoints",
+          "group": "Health",
           "openapi": {
-            "source": "api-reference/openapi.json"
+            "source": "api-reference/OpenAPI-specs/health.json"
           }
         },
           {
