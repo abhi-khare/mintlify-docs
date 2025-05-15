@@ -196,7 +196,7 @@
       }
     },
     "parameters": {
-      "sessionId": {
+      "call_id": {
         "description": "Unique call or session identifier"
       }
     },
