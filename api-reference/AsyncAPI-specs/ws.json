@@ -7,7 +7,7 @@
   },
   "servers": {
     "production": {
-      "host": "platform.voicelabs.in",
+      "host": "platform.voicelabs.in/api/v1",
       "protocol": "wss",
       "description": "Production websocket endpoint",
       "bindings": {
@@ -24,11 +24,6 @@
           }
         }
       },
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
       "tags": [
         {
           "name": "production",
@@ -137,19 +132,9 @@
         "$ref": "#/channels/transcript"
       },
       "summary": "Real\u2011time transcript stream for the call",
-      "messages": [
-        {
-          "$ref": "#/components/messages/TranscriptItem"
-        }
-      ],
       "tags": [
         {
           "name": "transcript"
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth": []
         }
       ]
     },
@@ -159,19 +144,9 @@
         "$ref": "#/channels/summary"
       },
       "summary": "One\u2011shot summary pushed after the call ends",
-      "messages": [
-        {
-          "$ref": "#/components/messages/CallSummary"
-        }
-      ],
       "tags": [
         {
           "name": "summary"
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth": []
         }
       ]
     },
@@ -181,19 +156,9 @@
         "$ref": "#/channels/categories"
       },
       "summary": "Detected categories for the call",
-      "messages": [
-        {
-          "$ref": "#/components/messages/CallCategories"
-        }
-      ],
       "tags": [
         {
           "name": "categories"
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth": []
         }
       ]
     },
@@ -203,19 +168,9 @@
         "$ref": "#/channels/extractedData"
       },
       "summary": "Structured data points extracted from the conversation",
-      "messages": [
-        {
-          "$ref": "#/components/messages/ExtractedData"
-        }
-      ],
       "tags": [
         {
           "name": "extracted-data"
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth": []
         }
       ]
     },
@@ -225,19 +180,9 @@
         "$ref": "#/channels/artifacts"
       },
       "summary": "URLs for audio, transcript file, and other artifacts",
-      "messages": [
-        {
-          "$ref": "#/components/messages/CallArtifacts"
-        }
-      ],
       "tags": [
         {
           "name": "artifacts"
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth": []
         }
       ]
     }
@@ -252,11 +197,7 @@
     },
     "parameters": {
       "sessionId": {
-        "description": "Unique call or session identifier",
-        "examples": [
-          "9c9823b25aea322289aa3c6b99bb195c"
-        ],
-        "pattern": "^[A-Za-z0-9\\-]+$"
+        "description": "Unique call or session identifier"
       }
     },
     "messages": {
