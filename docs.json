@@ -24,6 +24,12 @@
           "openapi": {
             "source": "api-reference/OpenAPI-specs/call.yaml"
           }
+        },
+          {
+          "group": "Post-call",
+          "openapi": {
+            "source": "api-reference/AsyncAPI-specs/post-call.yaml"
+          }
         }
         ]
       }

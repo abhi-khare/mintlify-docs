@@ -1,0 +1,189 @@
+asyncapi: 3.0.0
+info:
+  title: VoiceLabs Post‑Call Realtime API
+  version: 0.1.0
+  description: |
+    **AsyncAPI** contract that describes the websocket streams exposed by VoiceLabs
+    for post‑call processing artifacts: live transcript, summary, categories,
+    extracted data, and final artifacts.  
+    All channels are **read‑only** from the client’s point of view (server ➡️ client).
+    The client MUST connect with a valid JWT Bearer token via the `Authorization`
+    header during the websocket handshake.
+
+servers:
+  production:
+    host: platform.voicelabs.in
+    protocol: wss
+    description: Production websocket endpoint
+    security:
+      - bearerAuth: [ ]
+    tags:
+      - name: production
+        description: Production environment
+    bindings:
+      ws:
+        method: GET
+        query: {}
+        headers:
+          type: object
+          properties:
+            Authorization:
+              type: string
+              description: Bearer token in the form `Bearer <JWT>`
+    # base path is included in channel names
+
+defaultContentType: application/json
+
+channels:
+  /api/v1/ws/{sessionId}/transcript:
+    parameters:
+      sessionId:
+        description: Unique call or session identifier
+        schema:
+          type: string
+    subscribe:
+      summary: Real‑time transcript stream for the call
+      operationId: subscribeTranscript
+      message:
+        name: TranscriptItem
+        title: TranscriptItem
+        payload:
+          $ref: '#/components/schemas/TranscriptItem'
+      bindings:
+        ws: {}
+  /api/v1/ws/{sessionId}/summary:
+    parameters:
+      sessionId:
+        description: Unique call or session identifier
+        schema:
+          type: string
+    subscribe:
+      summary: One‑shot summary pushed after the call ends
+      operationId: subscribeSummary
+      message:
+        name: CallSummary
+        title: CallSummary
+        payload:
+          $ref: '#/components/schemas/CallSummary'
+      bindings:
+        ws: {}
+  /api/v1/ws/{sessionId}/categories:
+    parameters:
+      sessionId:
+        description: Unique call or session identifier
+        schema:
+          type: string
+    subscribe:
+      summary: List of detected categories for the call
+      operationId: subscribeCategories
+      message:
+        name: CallCategories
+        title: CallCategories
+        payload:
+          $ref: '#/components/schemas/CallCategories'
+      bindings:
+        ws: {}
+  /api/v1/ws/{sessionId}/extracted-data:
+    parameters:
+      sessionId:
+        description: Unique call or session identifier
+        schema:
+          type: string
+    subscribe:
+      summary: Key data points extracted from the conversation
+      operationId: subscribeExtractedData
+      message:
+        name: ExtractedData
+        title: ExtractedData
+        payload:
+          $ref: '#/components/schemas/ExtractedData'
+      bindings:
+        ws: {}
+  /api/v1/ws/{sessionId}/artifacts:
+    parameters:
+      sessionId:
+        description: Unique call or session identifier
+        schema:
+          type: string
+    subscribe:
+      summary: URLs for audio, transcript file, or any other artifacts generated
+      operationId: subscribeArtifacts
+      message:
+        name: CallArtifacts
+        title: CallArtifacts
+        payload:
+          $ref: '#/components/schemas/CallArtifacts'
+      bindings:
+        ws: {}
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    TranscriptItem:
+      type: object
+      description: Chunk of recognised speech
+      properties:
+        start_ms:
+          type: integer
+          description: Start time in milliseconds
+          example: 1250
+        end_ms:
+          type: integer
+          description: End time in milliseconds
+          example: 4830
+        speaker:
+          type: string
+          description: Speaker label (e.g., agent, customer)
+          example: customer
+        text:
+          type: string
+          example: "Hi, I’m calling about my recent service appointment…"
+    CallSummary:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Natural‑language summary of the call
+          example: >
+            The customer reported engine noise; the agent scheduled a follow‑up on 30 June.
+        sentiment:
+          type: string
+          description: Overall sentiment classification
+          example: neutral
+    CallCategories:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+          example: ["service_request", "engine_issues"]
+    ExtractedData:
+      type: object
+      description: Custom key/value pairs pulled from the conversation context
+      additionalProperties: true
+      example:
+        callback_date: "2025‑06‑30"
+        vehicle_no: "K34hjslwn"
+        customer_name: "Abhinash"
+    CallArtifacts:
+      type: object
+      properties:
+        audio_url:
+          type: string
+          format: uri
+        transcript_url:
+          type: string
+          format: uri
+        metadata_url:
+          type: string
+          format: uri
+      example:
+        audio_url: "https://cdn.voicelabs.in/calls/0e6f897f/audio.mp3"
+        transcript_url: "https://cdn.voicelabs.in/calls/0e6f897f/transcript.json"
+        metadata_url: "https://cdn.voicelabs.in/calls/0e6f897f/metadata.json"
