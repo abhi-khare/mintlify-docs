@@ -13,13 +13,7 @@
       {
         "tab": "API Reference",
         "groups": [
-          {
-          "group": "Websockets",
-          "asyncapi": {
-            "source": "api-reference/AsyncAPI-specs/ws.json",
-            "directory": "api-reference"
-          }
-        },
+          
           {
           "group": "Call",
           "openapi": {
@@ -31,6 +25,13 @@
           "group": "Campaign",
           "openapi": {
             "source": "api-reference/OpenAPI-specs/campaign.yaml"
+          }
+        },
+          {
+          "group": "Websockets",
+          "asyncapi": {
+            "source": "api-reference/AsyncAPI-specs/ws.json",
+            "directory": "api-reference"
           }
         },
           {

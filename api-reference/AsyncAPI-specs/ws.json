@@ -35,7 +35,7 @@
   "defaultContentType": "application/json",
   "channels": {
     "transcript": {
-      "address": "api/v1/ws/{sessionId}/transcript",
+      "address": "/ws/{sessionId}/transcript",
       "parameters": {
         "sessionId": {
           "$ref": "#/components/parameters/sessionId"
@@ -53,7 +53,7 @@
       ]
     },
     "summary": {
-      "address": "api/v1/ws/{sessionId}/summary",
+      "address": "/ws/{sessionId}/summary",
       "parameters": {
         "sessionId": {
           "$ref": "#/components/parameters/sessionId"
