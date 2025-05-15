@@ -12,7 +12,7 @@
     "tabs": [
       {
         "tab": "API Reference",
-        "asyncapi": "api-reference/AsyncAPI-specs/post-call.yaml"
+        "asyncapi": "api-reference/AsyncAPI-specs/ws.json"
     },
       {
         "tab": "API Reference",
