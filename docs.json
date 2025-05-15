@@ -27,8 +27,9 @@
         },
           {
           "group": "Post-call",
-          "openapi": {
-            "source": "api-reference/AsyncAPI-specs/post-call.yaml"
+            "asyncapi": {
+            "source": "api-reference/AsyncAPI-specs/post-call.yaml",
+            "directory": "api-reference"
           }
         },
           {
