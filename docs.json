@@ -14,12 +14,6 @@
         "tab": "API Reference",
         "groups": [
           {
-          "group": "Health",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.yaml"
-          }
-        },
-          {
           "group": "Call",
           "openapi": {
             "source": "api-reference/OpenAPI-specs/call.yaml"
@@ -30,6 +24,12 @@
           "group": "Campaign",
           "openapi": {
             "source": "api-reference/OpenAPI-specs/campaign.yaml"
+          }
+        },
+          {
+          "group": "Health",
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/health.yaml"
           }
         }
         ]
