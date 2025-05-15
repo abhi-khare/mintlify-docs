@@ -35,10 +35,10 @@
   "defaultContentType": "application/json",
   "channels": {
     "transcript": {
-      "address": "/ws/{sessionId}/transcript",
+      "address": "/ws/{call_id}/transcript",
       "parameters": {
-        "sessionId": {
-          "$ref": "#/components/parameters/sessionId"
+        "call_id": {
+          "$ref": "#/components/parameters/call_id"
         }
       },
       "messages": {
@@ -53,10 +53,10 @@
       ]
     },
     "summary": {
-      "address": "/ws/{sessionId}/summary",
+      "address": "/ws/{call_id}/summary",
       "parameters": {
-        "sessionId": {
-          "$ref": "#/components/parameters/sessionId"
+        "call_id": {
+          "$ref": "#/components/parameters/call_id"
         }
       },
       "messages": {
@@ -71,10 +71,10 @@
       ]
     },
     "categories": {
-      "address": "api/v1/ws/{sessionId}/categories",
+      "address": "/ws/{call_id}/categories",
       "parameters": {
-        "sessionId": {
-          "$ref": "#/components/parameters/sessionId"
+        "call_id": {
+          "$ref": "#/components/parameters/call_id"
         }
       },
       "messages": {
@@ -89,10 +89,10 @@
       ]
     },
     "extractedData": {
-      "address": "api/v1/ws/{sessionId}/extracted-data",
+      "address": "/ws/{call_id}/extracted-data",
       "parameters": {
-        "sessionId": {
-          "$ref": "#/components/parameters/sessionId"
+        "call_id": {
+          "$ref": "#/components/parameters/call_id"
         }
       },
       "messages": {
@@ -107,10 +107,10 @@
       ]
     },
     "artifacts": {
-      "address": "api/v1/ws/{sessionId}/artifacts",
+      "address": "/ws/{call_id}/artifacts",
       "parameters": {
-        "sessionId": {
-          "$ref": "#/components/parameters/sessionId"
+        "call_id": {
+          "$ref": "#/components/parameters/call_id"
         }
       },
       "messages": {
