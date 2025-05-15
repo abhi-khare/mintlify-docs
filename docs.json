@@ -12,11 +12,14 @@
     "tabs": [
       {
         "tab": "API Reference",
-        "asyncapi": "api-reference/AsyncAPI-specs/ws.json"
-    },
-      {
-        "tab": "API Reference",
         "groups": [
+          {
+          "group": "Websockets",
+          "asyncapi": {
+            "source": "api-reference/AsyncAPI-specs/ws.json",
+            "directory": "api-reference"
+          }
+        },
           {
           "group": "Call",
           "openapi": {
