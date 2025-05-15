@@ -1,120 +1,152 @@
 asyncapi: 3.0.0
 info:
   title: VoiceLabs Post‑Call Realtime API
-  version: 0.1.0
+  version: 0.2.0
   description: |
     **AsyncAPI** contract that describes the websocket streams exposed by VoiceLabs
     for post‑call processing artifacts: live transcript, summary, categories,
     extracted data, and final artifacts.  
-    All channels are **read‑only** from the client’s point of view (server ➡️ client).
-    The client MUST connect with a valid JWT Bearer token via the `Authorization`
-    header during the websocket handshake.
+    All operations are **receive** only (server ➡️ client).  
+    This file follows the final **AsyncAPI 3.0** structure (`channels` + `operations`).
 
 servers:
   production:
     host: platform.voicelabs.in
     protocol: wss
     description: Production websocket endpoint
-    security:
-      - bearerAuth: [ ]
-    tags:
-      - name: production
-        description: Production environment
     bindings:
       ws:
         method: GET
-        query: {}
         headers:
           type: object
           properties:
             Authorization:
               type: string
               description: Bearer token in the form `Bearer <JWT>`
-    # base path is included in channel names
+    security:
+      - bearerAuth: []
+    tags:
+      - name: production
+        description: Production environment
 
 defaultContentType: application/json
 
 channels:
-  /api/v1/ws/{sessionId}/transcript:
+  transcript:
+    address: api/v1/ws/{sessionId}/transcript
     parameters:
       sessionId:
-        description: Unique call or session identifier
-        schema:
-          type: string
-    subscribe:
-      summary: Real‑time transcript stream for the call
-      operationId: subscribeTranscript
-      message:
-        name: TranscriptItem
-        title: TranscriptItem
-        payload:
-          $ref: '#/components/schemas/TranscriptItem'
-      bindings:
-        ws: {}
-  /api/v1/ws/{sessionId}/summary:
+        $ref: '#/components/parameters/sessionId'
+    messages:
+      TranscriptItem:
+        $ref: '#/components/messages/TranscriptItem'
+    tags:
+      - name: transcript
+
+  summary:
+    address: api/v1/ws/{sessionId}/summary
     parameters:
       sessionId:
-        description: Unique call or session identifier
-        schema:
-          type: string
-    subscribe:
-      summary: One‑shot summary pushed after the call ends
-      operationId: subscribeSummary
-      message:
-        name: CallSummary
-        title: CallSummary
-        payload:
-          $ref: '#/components/schemas/CallSummary'
-      bindings:
-        ws: {}
-  /api/v1/ws/{sessionId}/categories:
+        $ref: '#/components/parameters/sessionId'
+    messages:
+      CallSummary:
+        $ref: '#/components/messages/CallSummary'
+    tags:
+      - name: summary
+
+  categories:
+    address: api/v1/ws/{sessionId}/categories
     parameters:
       sessionId:
-        description: Unique call or session identifier
-        schema:
-          type: string
-    subscribe:
-      summary: List of detected categories for the call
-      operationId: subscribeCategories
-      message:
-        name: CallCategories
-        title: CallCategories
-        payload:
-          $ref: '#/components/schemas/CallCategories'
-      bindings:
-        ws: {}
-  /api/v1/ws/{sessionId}/extracted-data:
+        $ref: '#/components/parameters/sessionId'
+    messages:
+      CallCategories:
+        $ref: '#/components/messages/CallCategories'
+    tags:
+      - name: categories
+
+  extractedData:
+    address: api/v1/ws/{sessionId}/extracted-data
     parameters:
       sessionId:
-        description: Unique call or session identifier
-        schema:
-          type: string
-    subscribe:
-      summary: Key data points extracted from the conversation
-      operationId: subscribeExtractedData
-      message:
-        name: ExtractedData
-        title: ExtractedData
-        payload:
-          $ref: '#/components/schemas/ExtractedData'
-      bindings:
-        ws: {}
-  /api/v1/ws/{sessionId}/artifacts:
+        $ref: '#/components/parameters/sessionId'
+    messages:
+      ExtractedData:
+        $ref: '#/components/messages/ExtractedData'
+    tags:
+      - name: extracted-data
+
+  artifacts:
+    address: api/v1/ws/{sessionId}/artifacts
     parameters:
       sessionId:
-        description: Unique call or session identifier
-        schema:
-          type: string
-    subscribe:
-      summary: URLs for audio, transcript file, or any other artifacts generated
-      operationId: subscribeArtifacts
-      message:
-        name: CallArtifacts
-        title: CallArtifacts
-        payload:
-          $ref: '#/components/schemas/CallArtifacts'
-      bindings:
-        ws: {}
+        $ref: '#/components/parameters/sessionId'
+    messages:
+      CallArtifacts:
+        $ref: '#/components/messages/CallArtifacts'
+    tags:
+      - name: artifacts
+
+operations:
+  subscribeTranscript:
+    action: receive
+    channel:
+      $ref: '#/channels/transcript'
+    summary: Real‑time transcript stream for the call
+    messages:
+      - $ref: '#/components/messages/TranscriptItem'
+    tags:
+      - name: transcript
+    security:
+      - bearerAuth: []
+
+  subscribeSummary:
+    action: receive
+    channel:
+      $ref: '#/channels/summary'
+    summary: One‑shot summary pushed after the call ends
+    messages:
+      - $ref: '#/components/messages/CallSummary'
+    tags:
+      - name: summary
+    security:
+      - bearerAuth: []
+
+  subscribeCategories:
+    action: receive
+    channel:
+      $ref: '#/channels/categories'
+    summary: Detected categories for the call
+    messages:
+      - $ref: '#/components/messages/CallCategories'
+    tags:
+      - name: categories
+    security:
+      - bearerAuth: []
+
+  subscribeExtractedData:
+    action: receive
+    channel:
+      $ref: '#/channels/extractedData'
+    summary: Structured data points extracted from the conversation
+    messages:
+      - $ref: '#/components/messages/ExtractedData'
+    tags:
+      - name: extracted-data
+    security:
+      - bearerAuth: []
+
+  subscribeArtifacts:
+    action: receive
+    channel:
+      $ref: '#/channels/artifacts'
+    summary: URLs for audio, transcript file, and other artifacts
+    messages:
+      - $ref: '#/components/messages/CallArtifacts'
+    tags:
+      - name: artifacts
+    security:
+      - bearerAuth: []
 
 components:
   securitySchemes:
@@ -123,8 +155,46 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
-  schemas:
+  parameters:
+    sessionId:
+      description: Unique call or session identifier
+      examples:
+        - 9c9823b25aea322289aa3c6b99bb195c
+      pattern: '^[A-Za-z0-9\-]+$'
+
+  messages:
     TranscriptItem:
+      name: TranscriptItem
+      title: TranscriptItem
+      payload:
+        $ref: '#/components/schemas/TranscriptPayload'
+
+    CallSummary:
+      name: CallSummary
+      title: CallSummary
+      payload:
+        $ref: '#/components/schemas/CallSummaryPayload'
+
+    CallCategories:
+      name: CallCategories
+      title: CallCategories
+      payload:
+        $ref: '#/components/schemas/CallCategoriesPayload'
+
+    ExtractedData:
+      name: ExtractedData
+      title: ExtractedData
+      payload:
+        $ref: '#/components/schemas/ExtractedDataPayload'
+
+    CallArtifacts:
+      name: CallArtifacts
+      title: CallArtifacts
+      payload:
+        $ref: '#/components/schemas/CallArtifactsPayload'
+
+  schemas:
+    TranscriptPayload:
       type: object
       description: Chunk of recognised speech
       properties:
@@ -143,7 +213,9 @@ components:
         text:
           type: string
           example: "Hi, I’m calling about my recent service appointment…"
-    CallSummary:
+      required: [start_ms, end_ms, speaker, text]
+
+    CallSummaryPayload:
       type: object
       properties:
         text:
@@ -155,7 +227,9 @@ components:
           type: string
           description: Overall sentiment classification
           example: neutral
-    CallCategories:
+      required: [text]
+
+    CallCategoriesPayload:
       type: object
       properties:
         categories:
@@ -163,7 +237,9 @@ components:
           items:
             type: string
           example: ["service_request", "engine_issues"]
-    ExtractedData:
+      required: [categories]
+
+    ExtractedDataPayload:
       type: object
       description: Custom key/value pairs pulled from the conversation context
       additionalProperties: true
@@ -171,7 +247,8 @@ components:
         callback_date: "2025‑06‑30"
         vehicle_no: "K34hjslwn"
         customer_name: "Abhinash"
-    CallArtifacts:
+
+    CallArtifactsPayload:
       type: object
       properties:
         audio_url:
