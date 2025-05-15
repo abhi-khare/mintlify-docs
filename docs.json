@@ -25,13 +25,7 @@
             "source": "api-reference/OpenAPI-specs/call.yaml"
           }
         },
-          {
-          "group": "Post-call",
-            "asyncapi": {
-            "source": "api-reference/AsyncAPI-specs/post-call.yaml",
-            "directory": "api-reference"
-          }
-        },
+          
           {
           "group": "Campaign",
           "openapi": {
