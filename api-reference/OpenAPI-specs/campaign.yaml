@@ -92,7 +92,6 @@ components:
 paths:
   /campaigns:
     post:
-      tags: [Campaigns]
       summary: Create a campaign
       operationId: createCampaign
       requestBody:
@@ -115,7 +114,6 @@ paths:
 
   /campaigns/{campaign_id}:
     patch:
-      tags: [Campaigns]
       summary: Update an existing campaign
       operationId: updateCampaign
       parameters:

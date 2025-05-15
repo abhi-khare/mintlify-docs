@@ -12,6 +12,10 @@
     "tabs": [
       {
         "tab": "API Reference",
+        "asyncapi": "api-reference/AsyncAPI-specs/post-call.yaml"
+    },
+      {
+        "tab": "API Reference",
         "groups": [
           {
           "group": "Call",
