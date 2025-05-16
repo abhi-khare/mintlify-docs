@@ -37,7 +37,8 @@
           {
           "group": "Health",
           "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.yaml"
+            "source": "api-reference/OpenAPI-specs/health.yaml",
+            "directory": ""
           }
         }
         ]
