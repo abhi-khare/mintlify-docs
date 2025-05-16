@@ -42,21 +42,7 @@
           }
         }
         ]
-      },
-      {
-        "tab": "API Reference 2",
-        "groups": [
-          {
-            "group": "Health",
-            "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.yaml",
-            "directory": ""
-          }
-          }
-        
-        ]
       }
-      
     ]
   },
   "logo": {
