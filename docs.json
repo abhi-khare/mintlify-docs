@@ -44,7 +44,10 @@
       },
       {
         "tab": "API Reference 2",
-        "openapi": "https://petstore3.swagger.io/api/v3/openapi.json"
+        "openapi": {
+            "source": "api-reference/OpenAPI-specs/health.yaml",
+            "directory": ""
+          }
     }
     ]
   },
