@@ -8,16 +8,13 @@
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
-  "api": {
-  "mdx": {
-    "server": "https://mintlify.com/api", 
-    "auth": {
-      "method": "key",
-      "name": "x-api-key"
-    }
-  }
-},
   "navigation": {
+    "tabs": [
+    {
+        "tab": "API Reference",
+        "openapi": "https://petstore3.swagger.io/api/v3/openapi.json"
+    }
+  ],
     "tabs": [
       {
         "tab": "API Reference",
