@@ -12,6 +12,7 @@
     "tabs": [
       {
         "tab": "API Reference",
+        
         "groups": [          
           {
           "group": "Call",
@@ -44,11 +45,18 @@
       },
       {
         "tab": "API Reference 2",
-        "openapi": {
+        "groups": [
+          {
+            "group": "Health",
+            "openapi": {
             "source": "api-reference/OpenAPI-specs/health.yaml",
             "directory": ""
           }
-    }
+          }
+        
+        ]
+      }
+      
     ]
   },
   "logo": {
