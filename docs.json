@@ -28,7 +28,7 @@
           }
         },
           {
-          "group": "Websockets",
+          "group": "Post-call artifacts[Websockets]",
           "asyncapi": {
             "source": "api-reference/AsyncAPI-specs/ws.json",
             "directory": "api-reference"
