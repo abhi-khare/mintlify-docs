@@ -35,9 +35,8 @@
         },
           {
           "group": "Post-call artifacts",
-          "asyncapi": {
-            "source": "api-reference/AsyncAPI-specs/ws.json",
-            "directory": "Websockets"
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/campaign.yaml"
           }
         },
           {
