@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "cosmos-webserver",
+    "title": "cosmos",
     "version": "1.0.0",
-    "description": "Auto-generated from Insomnia export"
+    "description": "APIs to help developer create real time conversational voice agents"
   },
   "servers": [
     {
-      "url": "https://dev.platform.voicelabs.in/api/v1"
+      "url": "https://platform.voicelabs.in/api/v1"
     }
   ],
   "paths": {
