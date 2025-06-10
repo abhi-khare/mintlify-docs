@@ -15,8 +15,6 @@
       "get": {
         "summary": "health",
         "tags": [
-          "prod",
-          "prod",
           "health"
         ],
         "responses": {
