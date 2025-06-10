@@ -17,6 +17,10 @@
         "tab": "Services"
       },
       {
+        "tab": "API TEST",
+        "openapi": "api-reference/OpenAPI-specs/cosmos.json"
+      },
+      {
         "tab": "API Reference",
         
         "groups": [          
