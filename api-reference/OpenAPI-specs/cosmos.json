@@ -29,91 +29,10 @@
         ]
       }
     },
-    "/signup": {
-      "post": {
-        "summary": "signup",
-        "tags": [
-          "prod",
-          "prod",
-          "auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "username": "abhinash",
-                "password": "ABHI@cosmos0103",
-                "email": "khare.abhinash4@gmail.com"
-              }
-            }
-          },
-          "required": true
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "summary": "login",
-        "tags": [
-          "prod",
-          "prod",
-          "auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "username": "abhinash",
-                "password": "ABHI@cosmos0103"
-              }
-            }
-          },
-          "required": true
-        }
-      }
-    },
-    "/confirm": {
-      "post": {
-        "summary": "confirm user",
-        "tags": [
-          "prod",
-          "prod",
-          "auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "username": "abhinash",
-                "confirmation_code": "069069"
-              }
-            }
-          },
-          "required": true
-        }
-      }
-    },
     "/get-call/{id}": {
       "get": {
         "summary": "get-call",
         "tags": [
-          "prod",
-          "prod",
           "call"
         ],
         "responses": {
@@ -137,8 +56,6 @@
       "post": {
         "summary": "create-call",
         "tags": [
-          "prod",
-          "prod",
           "call"
         ],
         "responses": {
@@ -181,8 +98,6 @@
       "get": {
         "summary": "list-call",
         "tags": [
-          "prod",
-          "prod",
           "call"
         ],
         "responses": {
@@ -234,8 +149,6 @@
       "post": {
         "summary": "get-campaign",
         "tags": [
-          "prod",
-          "prod",
           "campaign"
         ],
         "responses": {
@@ -260,8 +173,6 @@
       "post": {
         "summary": "delete-campaign",
         "tags": [
-          "prod",
-          "prod",
           "campaign"
         ],
         "responses": {
@@ -286,8 +197,6 @@
       "post": {
         "summary": "create-campaign",
         "tags": [
-          "prod",
-          "prod",
           "campaign"
         ],
         "responses": {
@@ -311,8 +220,6 @@
       "put": {
         "summary": "update-campaign",
         "tags": [
-          "prod",
-          "prod",
           "campaign"
         ],
         "responses": {
