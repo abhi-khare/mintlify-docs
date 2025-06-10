@@ -1,0 +1,107 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "cosmos-webserver",
+    "version": "1.0.0",
+    "description": "Auto-generated from Insomnia export"
+  },
+  "servers": [
+    {
+      "url": "https://platform.voicelabs.in/api/v1"
+    }
+  ],
+  "paths": {
+    "/get-campaign": {
+      "post": {
+        "summary": "get-campaign",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "wo290rhb019er1oje12j0e0"
+          }
+        ]
+      }
+    },
+    "/delete-campaign": {
+      "post": {
+        "summary": "delete-campaign",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "wo290rhb019er1oje12j0e0"
+          }
+        ]
+      }
+    },
+    "/create-campaign": {
+      "post": {
+        "summary": "create-campaign",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "921u34e90rj230jdoijqd"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/update-campaign": {
+      "put": {
+        "summary": "update-campaign",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "921u34e90rj230jdoijqd"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  }
+}

@@ -21,15 +21,21 @@
         
         "groups": [          
           {
-          "group": "Call",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/cosmos.json"
-          }
-        },
-          {
             "group": "Call",
           "openapi": {
             "source": "api-reference/OpenAPI-specs/call.json"
+          }
+        },
+          {
+            "group": "Campaign",
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/campaign.json"
+          }
+        },
+          {
+            "group": "Health",
+          "openapi": {
+            "source": "api-reference/OpenAPI-specs/health.json"
           }
         }
         ]
