@@ -17,32 +17,8 @@
         "tab": "Services"
       },
       {
-        "tab": "API TEST",
-        "openapi": "api-reference/OpenAPI-specs/cosmos.json"
-      },
-      {
         "tab": "API Reference",
-        
-        "groups": [          
-          {
-            "group": "Call",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/call.json"
-          }
-        },
-          {
-            "group": "Campaign",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/campaign.json"
-          }
-        },
-          {
-            "group": "Health",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.json"
-          }
-        }
-        ]
+        "openapi": "api-reference/OpenAPI-specs/cosmos.json"
       }
     ]
   },
