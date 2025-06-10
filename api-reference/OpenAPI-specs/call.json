@@ -14,11 +14,6 @@
     "/get-call/{id}": {
       "get": {
         "summary": "get-call",
-        "tags": [
-          "prod",
-          "prod",
-          "call"
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -39,11 +34,6 @@
     "/create-call": {
       "post": {
         "summary": "create-call",
-        "tags": [
-          "prod",
-          "prod",
-          "call"
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -83,11 +73,6 @@
     "/list-call": {
       "get": {
         "summary": "list-call",
-        "tags": [
-          "prod",
-          "prod",
-          "call"
-        ],
         "responses": {
           "200": {
             "description": "Successful response"

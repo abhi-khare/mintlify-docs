@@ -27,6 +27,7 @@
           }
         },
           {
+            "group": "Call",
           "openapi": {
             "source": "api-reference/OpenAPI-specs/call.json"
           }
