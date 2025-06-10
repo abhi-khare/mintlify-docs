@@ -26,24 +26,10 @@
             "source": "api-reference/OpenAPI-specs/cosmos.json"
           }
         },
-          
           {
-          "group": "Campaign",
+          "group": "Call",
           "openapi": {
-            "source": "api-reference/OpenAPI-specs/campaign.yaml"
-          }
-        },
-          {
-          "group": "Post-call artifacts",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/post-call.yaml"
-          }
-        },
-          {
-          "group": "Health",
-          "openapi": {
-            "source": "api-reference/OpenAPI-specs/health.yaml",
-            "directory": "REST"
+            "source": "api-reference/OpenAPI-specs/call.json"
           }
         }
         ]

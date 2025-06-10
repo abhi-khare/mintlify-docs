@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://dev.platform.voicelabs.in/api/v1"
+      "url": "https://platform.voicelabs.in/api/v1"
     }
   ],
   "paths": {

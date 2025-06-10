@@ -1,0 +1,147 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "cosmos-webserver",
+    "version": "1.0.0",
+    "description": "Auto-generated from Insomnia export"
+  },
+  "servers": [
+    {
+      "url": "https://platform.voicelabs.in/api/v1"
+    }
+  ],
+  "paths": {
+    "/get-call/{id}": {
+      "get": {
+        "summary": "get-call",
+        "tags": [
+          "prod",
+          "prod",
+          "call"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/create-call": {
+      "post": {
+        "summary": "create-call",
+        "tags": [
+          "prod",
+          "prod",
+          "call"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "to_number": "+917987544173",
+                "dynamic_variables": {
+                  "customer_name": "abhinash",
+                  "dealer_name": "vinod volvo",
+                  "vehicle_no": "K34hjslwn",
+                  "callback_date": "30 june 25",
+                  "callback_time": "12 pm",
+                  "alt_contact_name": "chrome",
+                  "alt_contact_no": "+91n839jf02"
+                },
+                "metadata": {
+                  "org_id": "org_398ufn29a",
+                  "user_id": "user_9204jkal"
+                },
+                "campaign_id": "903ef554-b54d-4918-964f-dede9cf69f10"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/list-call": {
+      "get": {
+        "summary": "list-call",
+        "tags": [
+          "prod",
+          "prod",
+          "call"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "campid20459gn49w0jqnr93"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "2025-05-07T00:00:00"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "2025-05-11T00:00:00"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "5"
+          }
+        ]
+      }
+    },
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  }
+}

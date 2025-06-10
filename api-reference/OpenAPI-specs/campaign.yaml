@@ -1,145 +1,128 @@
-openapi: 3.0.3
-info:
-  title: VoiceLabs Campaign API
-  version: 0.1.0
-  description: |
-    **Generated from the Insomnia export (campaign folder).**
-    The original requests lacked explicit URLs or payload details, so this
-    spec follows REST conventions (`POST /campaigns`, `PATCH /campaigns/{campaign_id}`)
-    and provides placeholder schemas.  
-    **⚠️  Update paths, HTTP verbs, and schemas to match your real service.**
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "cosmos-webserver",
+    "version": "1.0.0",
+    "description": "Auto-generated from Insomnia export"
+  },
+  "servers": [
+    {
+      "url": "https://platform.voicelabs.in/api/v1"
+    }
+  ],
+  "paths": {
 
-servers:
-  - url: https://platform.voicelabs.in/api/v1
-tags:
-  - name: Campaigns
-    description: Create and maintain voice‑campaign definitions
-
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-  schemas:
-    CampaignCreateRequest:
-      type: object
-      description: |
-        Replace these fields with the actual attributes your backend expects
-        when creating a campaign.
-      properties:
-        name:
-          type: string
-          example: "July service‑reminder"
-        start_date:
-          type: string
-          format: date
-          example: "2025‑07‑01"
-        end_date:
-          type: string
-          format: date
-          example: "2025‑07‑31"
-        metadata:
-          type: object
-          additionalProperties: true
-      required:
-        - name
-
-    CampaignUpdateRequest:
-      type: object
-      description: |
-        Subset of fields that can be updated. Mark every property as optional so
-        clients may send partial updates.
-      properties:
-        name:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        metadata:
-          type: object
-          additionalProperties: true
-
-    CampaignResponse:
-      type: object
-      description: Common representation of a campaign
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        status:
-          type: string
-          example: "active"
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-
-paths:
-  /campaigns:
-    post:
-      summary: Create a campaign
-      operationId: createCampaign
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CampaignCreateRequest'
-      responses:
-        '201':
-          description: Campaign created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CampaignResponse'
-        '400':
-          description: Invalid input
-      security:
-        - bearerAuth: [ ]
-
-  /campaigns/{campaign_id}:
-    patch:
-      summary: Update an existing campaign
-      operationId: updateCampaign
-      parameters:
-        - name: campaign_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CampaignUpdateRequest'
-      responses:
-        '200':
-          description: Campaign updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CampaignResponse'
-        '404':
-          description: Campaign not found
-      security:
-        - bearerAuth: [ ]
-
-security:
-  - bearerAuth: [ ]
+    "/get-campaign": {
+      "post": {
+        "summary": "get-campaign",
+        "tags": [
+          "prod",
+          "prod",
+          "campaign"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "wo290rhb019er1oje12j0e0"
+          }
+        ]
+      }
+    },
+    "/delete-campaign": {
+      "post": {
+        "summary": "delete-campaign",
+        "tags": [
+          "prod",
+          "prod",
+          "campaign"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "wo290rhb019er1oje12j0e0"
+          }
+        ]
+      }
+    },
+    "/create-campaign": {
+      "post": {
+        "summary": "create-campaign",
+        "tags": [
+          "prod",
+          "prod",
+          "campaign"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "921u34e90rj230jdoijqd"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/update-campaign": {
+      "put": {
+        "summary": "update-campaign",
+        "tags": [
+          "prod",
+          "prod",
+          "campaign"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "921u34e90rj230jdoijqd"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  }
+}
