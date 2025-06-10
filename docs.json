@@ -23,7 +23,7 @@
           {
           "group": "Call",
           "openapi": {
-            "source": "api-reference/OpenAPI-specs/call.yaml"
+            "source": "api-reference/OpenAPI-specs/cosmos.json"
           }
         },
           
